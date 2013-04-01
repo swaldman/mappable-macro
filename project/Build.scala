@@ -6,22 +6,30 @@ object MchangeCommonsScalaMacroBuild extends Build {
   val nexusSnapshots = nexus + "content/repositories/snapshots";
   val nexusReleases = nexus + "service/local/staging/deploy/maven2";
 
-  val projName = "casemap";
+  val projName = "mchange-commons-scala-macro";
 
   val mySettings = Seq( 
+    Keys.organization := "com.mchange",
     Keys.name := projName, 
-    Keys.version := "0.0.1", 
+    Keys.version := "0.0.1-SNAPSHOT", 
     Keys.scalaVersion := "2.10.1",
+    Keys.publishTo <<= Keys.version { 
+      (v: String) => {
+	if (v.trim.endsWith("SNAPSHOT"))
+	  Some("snapshots" at nexusSnapshots )
+	else
+	  Some("releases"  at nexusReleases )
+      }
+    },
     Keys.scalacOptions ++= Seq("-deprecation", "-Xlog-free-terms" /*, "-Ymacro-debug-lite" */),
-    Keys.resolvers += ("snapshots" at nexusSnapshots )
+    Keys.resolvers += ("snapshots" at nexusSnapshots ),
+    Keys.pomExtra := pomExtraXml
   );
 
   val dependencies = Seq(
     "org.scala-lang" % "scala-reflect" % "2.10.1",
     "org.scala-lang" % "scala-compiler" % "2.10.1",
-//    "com.typesafe.akka" %% "akka-actor" % "2.1+",
     "org.specs2" %% "specs2" % "1.14+" % "test"
-//    "com.mchange" %% "mchange-commons-scala" % "0.4.0-SNAPSHOT" changing()
   );
 
 
@@ -33,4 +41,31 @@ object MchangeCommonsScalaMacroBuild extends Build {
     settings = Project.defaultSettings ++ (Keys.libraryDependencies ++= dependencies)
   );
 
+  val pomExtraXml = (
+      <url>https://github.com/swaldman/mchange-commons-scala-macro</url>
+      <licenses>
+        <license>
+          <name>GNU Lesser General Public License, Version 2.1</name>
+          <url>http://www.gnu.org/licenses/lgpl-2.1.html</url> 
+          <distribution>repo</distribution>
+        </license>
+        <license>
+          <name>Eclipse Public License, Version 1.0</name>
+          <url>http://www.eclipse.org/org/documents/epl-v10.html</url> 
+          <distribution>repo</distribution>
+        </license>
+     </licenses>
+     <scm>
+       <url>git@github.com:swaldman/mchange-commons-scala-macro.git</url>
+       <connection>scm:git:git@github.com:swaldman/mchange-commons-scala-macro.git</connection>
+     </scm>
+     <developers>
+       <developer>
+         <id>swaldman</id>
+         <name>Steve Waldmam</name>
+         <email>swaldman@mchange.com</email>
+       </developer>
+     </developers>
+  );
 }
+
