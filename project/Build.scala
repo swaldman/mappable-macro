@@ -56,7 +56,7 @@ object MappableMacroBuild extends Build {
         </license>
      </licenses>
      <scm>
-       <url>git@github.com:swaldman/mchange-commons-scala-macro.git</url>
+       <url>git@github.com:swaldman/mappable-macro.git</url>
        <connection>scm:git:git@github.com:swaldman/mappable-macro.git</connection>
      </scm>
      <developers>
