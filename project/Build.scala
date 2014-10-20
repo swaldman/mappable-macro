@@ -1,12 +1,12 @@
 import sbt._
 
-object MchangeCommonsScalaMacroBuild extends Build {
+object MappableMacroBuild extends Build {
 
   val nexus = "https://oss.sonatype.org/"
   val nexusSnapshots = nexus + "content/repositories/snapshots";
   val nexusReleases = nexus + "service/local/staging/deploy/maven2";
 
-  val projName = "mchange-commons-scala-macro";
+  val projName = "mappable-macro";
 
   val mySettings = Seq( 
     Keys.organization := "com.mchange",
@@ -42,7 +42,7 @@ object MchangeCommonsScalaMacroBuild extends Build {
   );
 
   val pomExtraXml = (
-      <url>https://github.com/swaldman/mchange-commons-scala-macro</url>
+      <url>https://github.com/swaldman/mappable-macro</url>
       <licenses>
         <license>
           <name>GNU Lesser General Public License, Version 2.1</name>
@@ -57,7 +57,7 @@ object MchangeCommonsScalaMacroBuild extends Build {
      </licenses>
      <scm>
        <url>git@github.com:swaldman/mchange-commons-scala-macro.git</url>
-       <connection>scm:git:git@github.com:swaldman/mchange-commons-scala-macro.git</connection>
+       <connection>scm:git:git@github.com:swaldman/mappable-macro.git</connection>
      </scm>
      <developers>
        <developer>
